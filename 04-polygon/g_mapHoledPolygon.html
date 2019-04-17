@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+       /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>My Google Maps Demo</h3>
+    <!--The div element for the map -->
+    <div id="map"></div>
+    <script>
+// Initialize and add the map
+function initMap() {
+  // The location of Beirut
+  var beirut = {lat: 33.8861, lng: 35.5046};
+  // The map, centered at Beirut
+  var map = new google.maps.Map(
+      document.getElementById('map'), {zoom: 13, center: beirut});
+  // The marker, positioned at Beirut
+  var marker = new google.maps.Marker({position: beirut, map: map});
+  
+  var infowindow = new google.maps.InfoWindow({
+    content: "<b>Hello world!</b><br>I am an InfoWindow."
+  });
+  
+  marker.addListener('click', function() {
+    infowindow.open(map, marker);
+  });
+  
+  var newHighwayPoints = [
+    {lat: 33.9037611640498, lng: 35.481719970703125},
+    {lat: 33.92399018008705, lng: 35.53407669067383},
+    {lat: 33.917580096158495, lng: 35.58300018310547}
+  ];
+  
+  var highwayPolyline = new google.maps.Polyline({
+    path: newHighwayPoints,
+    geodesic: true,
+    strokeColor: '#FF0000',
+    strokeOpacity: 1.0,
+    strokeWeight: 2
+  });
+  
+  highwayPolyline.setMap(map);
+  
+  var greenfieldCoords = [
+    {lat: 33.902405416821026, lng: 35.48113524913788},
+    {lat: 33.90148821599344, lng: 35.480858981609344},
+    {lat: 33.90134796354081, lng: 35.4815536737442},
+    {lat: 33.902265165877225, lng: 35.48182725906372},
+	{lat: 33.902405416821026, lng: 35.48113524913788}
+  ];
+  
+  var greenfieldInnerCoords = [
+    {lat: 33.90222064171981, lng: 35.48125863075256},
+    {lat: 33.902158307860404, lng: 35.48164486885071},
+    {lat: 33.90149044222098, lng: 35.48145174980163},
+    {lat: 33.90161511087081, lng: 35.48104405403137},
+	{lat: 33.90222064171981, lng: 35.48125863075256}
+  ];
+  
+  var greenfieldPoly = new google.maps.Polygon({
+    paths: [greenfieldCoords, greenfieldInnerCoords],
+    strokeColor: '#FF0000',
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: '#FF0000',
+    fillOpacity: 0.35
+  });
+  greenfieldPoly.setMap(map);
+ 
+  
+  var bounds = new google.maps.LatLngBounds();
+
+  for (var i=0; i<greenfieldPoly.getPath().length; i++)
+  {
+    var point = new google.maps.LatLng(greenfieldCoords[i].lat, greenfieldCoords[i].lng);
+    bounds.extend(point);
+  }
+
+	map.fitBounds(bounds);
+}
+    </script>
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    -->
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA51jQ8MsA_UMKrxhIOrxmGZh_a9FxobTc&callback=initMap">
+    </script>
+  </body>
+</html>

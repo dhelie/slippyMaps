@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://unpkg.com/topojson-client@3"></script>
+	
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 
+	https://developers.google.com/maps/documentation/javascript/get-api-key
+	https://developers.google.com/maps/billing/understanding-cost-of-use#billing-overview
+	-->
+	
+	<div id="map"></div>
+    <script>
+      var map;
+      function initMap() {
+        
+		var beirut = {lat: 33.8861, lng: 35.5046};
+		map = new google.maps.Map(document.getElementById('map'), {
+          center: beirut,
+          zoom: 9
+        });
+		
+		var topojsonResp = $.ajax({
+          url:"lebanon.topojson",
+          dataType: "json",
+          success: console.log("topojson data successfully loaded."),
+          error: function (xhr) {
+            console.log(xhr.statusText)
+          }
+        });
+		
+		
+		$.when(topojsonResp).done(function() {
+            var jsonData = topojsonResp.responseJSON;
+			
+			for (key in jsonData.objects) {
+				geojson = topojson.feature(jsonData, jsonData.objects[key]);
+				map.data.addGeoJson(geojson); 
+			}
+        });
+		
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA51jQ8MsA_UMKrxhIOrxmGZh_a9FxobTc&callback=initMap"
+    async defer></script>
+  </body>
+</html>

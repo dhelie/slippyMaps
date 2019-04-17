@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+	  #floating-panel input {vertical-align:middle;}
+    </style>
+  </head>
+  <body>
+	<!-- Add an input button to initiate the toggle method on the overlay. -->
+    <div id="floating-panel">
+      <input type="button" value="Overlay Map" onclick="toggle();"></input>
+	  <input type="range" name="opacity" min="0" max="1" step="0.1" oninput="changeOpacity(this.value)" onchange="changeOpacity(this.value)">
+	  <span id="valBox"></span>
+    </div>
+	
+	<div id="map"></div>
+    <script>
+      var map;
+	  var layer;
+      function initMap() {
+        
+		var mapMinZoom = 1;
+		var mapMaxZoom = 18;
+		
+		var beirut = {lat: 33.8861, lng: 35.5046};
+		map = new google.maps.Map(document.getElementById('map'), {
+          center: beirut,
+          zoom: 13,
+		  minZoom: mapMinZoom,
+		  maxZoom: mapMaxZoom
+		});
+		
+		//[sw, ne]
+		var mapBounds = new google.maps.LatLngBounds(
+			new google.maps.LatLng(33.8609184125771634, 35.4655938543420035),
+			new google.maps.LatLng(33.9085188065194103, 35.5432623509244294)
+			);
+		
+		
+		// Replace this with your URL.
+		var TILE_URL = '../tiles/tms_oldbeirut/{z}/{x}/{y}.png';
+
+		// Name the layer anything you like.
+		var layerID = 'my_custom_layer';
+
+		// Create a new ImageMapType layer.
+		layer = new google.maps.ImageMapType({
+		  name: layerID,
+		  getTileUrl: function(coord, zoom) {
+			//console.log(coord);
+			
+			var proj = map.getProjection();
+			
+			var z2 = Math.pow(2, zoom);
+			var tileXSize = 256 / z2;
+			var tileYSize = 256 / z2;
+			
+			var tileBounds = new google.maps.LatLngBounds(
+				proj.fromPointToLatLng(new google.maps.Point(coord.x * tileXSize, (coord.y + 1) * tileYSize)),
+				proj.fromPointToLatLng(new google.maps.Point((coord.x + 1) * tileXSize, coord.y * tileYSize))
+			);
+			
+			if (mapBounds.intersects(tileBounds))
+            {
+				var _y = (Math.pow(2,zoom)-coord.y-1);
+				
+				var url = TILE_URL
+				  .replace('{x}', coord.x)
+				  .replace('{y}', _y)
+				  .replace('{z}', zoom);
+				return url;
+			}
+			
+			return null;
+		  },
+		  tileSize: new google.maps.Size(256, 256),
+		  minZoom: mapMinZoom,
+		  maxZoom: mapMaxZoom
+		});
+		
+		map.overlayMapTypes.insertAt(0, layer);
+		
+		changeOpacity(0.5);
+      }
+	  
+	  function toggle()
+		{
+			if(map.overlayMapTypes.getAt(0) === layer)
+			{
+				map.overlayMapTypes.removeAt(0);
+			}
+			else
+			{
+				map.overlayMapTypes.insertAt(0, layer);
+			}
+		}
+		
+		function changeOpacity(newVal){
+		  layer.setOpacity(parseFloat(newVal));
+		  document.getElementById("valBox").innerHTML=newVal;
+		}
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA51jQ8MsA_UMKrxhIOrxmGZh_a9FxobTc&callback=initMap"
+    async defer></script>
+  </body>
+</html>
