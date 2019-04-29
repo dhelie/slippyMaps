@@ -25,6 +25,10 @@
 		<!--[if lt IE 9]>
 		<script src="reveal.js-3.8.0/lib/js/html5shiv.js"></script>
 		<![endif]-->
+		
+		<style>
+			table pre {margin: 0 auto !important;line-height: 1.6em !important; width:auto !important;}
+		</style>
 	</head>
 	<body>
 		<div class="reveal">
@@ -189,7 +193,167 @@
 						
 						<p><q cite="https://en.wikipedia.org/wiki/GeoJSON">It is an open standard format designed for representing simple geographical features, along with their non-spatial attributes. It is based on JSON, the JavaScript Object Notation</q> — Wikipedia</p>
 					</section>
+					
+					<section>
+						<h4>JSON</h4>
+						
+						<blockquote cite="https://www.json.org/" style="font-size:0.7em;margin-bottom:0;">
+						<p>JSON (JavaScript Object Notation) is a lightweight data-interchange format. It is easy for humans to read and write. It is easy for machines to parse and generate.</p>
+						
+						<p>JSON is built on two structures:</p>
+						<ul>
+							<li>A collection of name/value pairs.</li>
+							<li>An ordered list of values.</li>
+						</ul>
+						</blockquote><span style="font-size: 0.7em;"> — json.org</span>
+						
+						<p style="font-size: 0.7em;">GeoJSON inherits the same rules and requires objects to contain the keys; <br/>type, features, geometry, coordinates, and properties.</p>
+						
+					</section>
+					
+					<section>
+						<h4>GeoJSON format</h4>
+						<pre><code class="javascript" data-trim style="font-size: 18px;">
+							{
+							  "type": "FeatureCollection",
+							  "features": [
+								{
+								  "type": "Feature",
+								  "geometry": {
+									"type": "Point", // or LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon
+									"coordinates": [102.0, 0.5] // or more points
+								  },
+								  "properties": {
+									"prop0": "value0"
+								  }
+								}
+								//, or more features
+							  ]
+							}
+						</code></pre>
+					</section>
+					
+					<section>
+						<h4>Features (Geometry primitives)</h4>
+							<table style="font-size:0.5em;">
+								<thead>
+									<tr>
+										<th>Feature</th>
+										<th></th>
+										<th>Example</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td style="vertical-align:middle;">Point</td>
+										<td style="vertical-align:middle;">
+											<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/SFA_Point.svg/51px-SFA_Point.svg.png"/>
+										</td>
+										<td>
+											<pre><code class="javascript" data-trim style="font-size: 18px;">
+												{
+													 "type": "Point", 
+													 "coordinates": [30, 10]
+												}
+											</code></pre>
+										</td>
+									</tr>
+									
+									<tr>
+										<td style="vertical-align:middle;">LineString</td>
+										<td style="vertical-align:middle;">
+											<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/SFA_LineString.svg/51px-SFA_LineString.svg.png"/>
+										</td>
+										<td>
+											<pre><code class="javascript" data-trim style="font-size: 18px;">
+												{
+													"type": "LineString", 
+													"coordinates": [
+														[30, 10], [10, 30], [40, 40]
+													]
+												}
+											</code></pre>
+										</td>
+									</tr>
+									
+									<tr>
+										<td rowspan="2" style="vertical-align:middle;">Polygon</td>
+										<td style="vertical-align:middle;">
+											<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/SFA_Polygon.svg/51px-SFA_Polygon.svg.png"/>
+										</td>
+										<td>
+											<pre><code class="javascript" data-trim style="font-size: 18px;">
+												{
+													"type": "Polygon", 
+													"coordinates": [
+														[[30, 10], [40, 40], [20, 40], [10, 20], [30, 10]]
+													]
+												}
+											</code></pre>
+										</td>
+									</tr>
+									
+									<tr>
+										
+										<td style="vertical-align:middle;">
+											<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/SFA_Polygon_with_hole.svg/51px-SFA_Polygon_with_hole.svg.png"/>
+										</td>
+										<td>
+											<pre><code class="javascript" data-trim style="font-size: 18px;">
+												{
+													"type": "Polygon", 
+													"coordinates": [
+														[[35, 10], [45, 45], [15, 40], [10, 20], [35, 10]], 
+														[[20, 30], [35, 35], [30, 20], [20, 30]]
+													]
+												}
+											</code></pre>
+										</td>
+									</tr>
+									
+								</tbody>
+							</table>
+					</section>
+					
+					<section>
+						<h4>Online Renderer & Editor</h4>
+						
+						<p><a href="http://geojson.io/" target="_blank">geojson.io</a></p>
+					</section>
+					
+					<section>
+						<h4>Slippy maps & GeoJSON Vector data samples</h4>
+						<p>Point, LineString, and Polygons (API Independent)</p>
+						<ul>
+							<li><a href="05-geojson/leaflet.html" target="_blank">Leaflet</a></li>
+							<li><a href="05-geojson/gmaps.html" target="_blank">Google Maps</a></li>
+							<li class="fragment"><a href="05-geojson/d3.html" target="_blank">D3</a></li>
+						</ul>
+					</section>
 				</section>
+				
+				<section>
+					<section>
+						<h4 style="text-transform:none;">TopoJSON</h4>
+						<p><q cite="https://github.com/topojson/topojson/wiki">TopoJSON is an extension of GeoJSON that encodes topology. Rather than representing geometries discretely, geometries in TopoJSON files are stitched together from shared line segments called arcs.<br/> As a result, TopoJSON is substantially more compact than GeoJSON.</q> — github.com/topojson</p>
+					</section>
+					
+					<section>
+						<h4>Online GeoJSON to TopoJSON</h4>
+						<p><a href="https://mapshaper.org/" target="_blank">mapshaper.org</a></p>
+						<p><a href="http://geojson.io/" target="_blank">geojson.io</a></p>
+					</section>
+					
+					<section>
+						<h4>Slippy maps & TopoJSON Vector data samples</h4>
+						<p>Point, LineString, and Polygons (API Independent)</p>
+						<ul>
+							<li><a href="06-topojson/leaflet.html" target="_blank">Leaflet</a></li>
+							<li><a href="06-topojson/gmaps.html" target="_blank">Google Maps</a></li>
+						</ul>
+					</section>
+				</section>
+
 			</div>
 		</div>
 
