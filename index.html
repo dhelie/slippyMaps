@@ -107,8 +107,6 @@
 								<ul><li>33° 52' 45.4368'' N, 35° 30' 34.722'' E</li></ul>
 						</ul>
 						
-						
-						
 					</section>
 					
 					<section>
@@ -137,6 +135,16 @@
 						</ul>
 					</section>	
 					
+					<section>
+						<h4>Public domain map datasets</h4>
+						<ul>
+							<li><a href="https://www.naturalearthdata.com/" target="_blank">Natural Earth Data</a></li>
+							<li><a href="http://opendata.arcgis.com/" target="_blank">Esri Open Data</a></li>
+							<li><a href="https://www.openstreetmap.org" target="_blank">OpenStreetMap</a></li>
+							<li class="fragment">and much more ...</li>
+						</ul>
+					</section>
+					
 				</section>
 				
 				<section>
@@ -148,6 +156,13 @@
 						<p>For more information on Google Maps JavaScript API Usage and Billing click <a target="_blank" href="https://developers.google.com/maps/documentation/javascript/usage-and-billing">here</a></p>
 					</section>
 					
+					<section>
+						<h4>Api Reference</h4>
+						<ul>
+							<li><a href="https://leafletjs.com/reference-1.4.0.html" target="_blank">Leaflet</a></li>
+							<li><a href="https://developers.google.com/maps/documentation/javascript/tutorial" target="_blank">Google Maps</a></li>
+						</ul>
+					</section>
 					<section>
 						<h4>Slippy maps & Vector data samples</h4>
 						<p>Hello Beirut</p>
@@ -250,7 +265,7 @@
 											<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/SFA_Point.svg/51px-SFA_Point.svg.png"/>
 										</td>
 										<td>
-											<pre><code class="javascript" data-trim style="font-size: 18px;">
+											<pre><code class="json hljs" data-trim style="font-size: 18px;">
 												{
 													 "type": "Point", 
 													 "coordinates": [30, 10]
@@ -265,7 +280,7 @@
 											<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/SFA_LineString.svg/51px-SFA_LineString.svg.png"/>
 										</td>
 										<td>
-											<pre><code class="javascript" data-trim style="font-size: 18px;">
+											<pre><code class="json hljs" data-trim style="font-size: 18px;">
 												{
 													"type": "LineString", 
 													"coordinates": [
@@ -282,7 +297,7 @@
 											<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/SFA_Polygon.svg/51px-SFA_Polygon.svg.png"/>
 										</td>
 										<td>
-											<pre><code class="javascript" data-trim style="font-size: 18px;">
+											<pre><code class="json hljs" data-trim style="font-size: 18px;">
 												{
 													"type": "Polygon", 
 													"coordinates": [
@@ -299,7 +314,7 @@
 											<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/SFA_Polygon_with_hole.svg/51px-SFA_Polygon_with_hole.svg.png"/>
 										</td>
 										<td>
-											<pre><code class="javascript" data-trim style="font-size: 18px;">
+											<pre><code class="json hljs" data-trim style="font-size: 18px;">
 												{
 													"type": "Polygon", 
 													"coordinates": [
@@ -353,6 +368,79 @@
 						</ul>
 					</section>
 				</section>
+				
+				<section>
+					<section>
+						<h4 style="font-size: 0.9em;">Creating raster data from historic scanned maps</h4>
+						<object style="background:#faebd7;width:50%;" data="customTilesFlow.svg" type="image/svg+xml">
+						  <img style="width:50%;border:none;" src="customTilesFlow.png" />
+						</object>
+					</section>
+					
+					<section>
+						<h4>Georeferencing Imagery</h4>
+						<p><q cite="https://docs.mapbox.com/help/tutorials/georeferencing-imagery/">It is the process of assigning geographic coordinates to a raster image to define its location in the world based on a map coordinate system.</q> — mapbox</p>
+						
+						<h5>Tools</h5>
+						<ul>
+							<li><a href="https://qgis.org/en/site/forusers/download.html" target="_blank">QGIS</a></li>
+							<li>Georeferencer GDAL plugin,<small style="vertical-align:middle;">&nbsp; comes preinstalled in QGIS, but needs activation.</small></li>
+						</ul>
+					</section>
+					
+					<section>
+						<h4>Generating XYZ or slippy map tiles</h4>
+						
+						<h5>Tools</h5>
+						<ul>
+							<li>QGIS Processing Algorithm "Generate XYZ tiles" <small>&nbsp; (Milestone 3.8)</small></li>
+							<li><a href="qtiles3-1.6.0.zip">QTiles 3</a><br/><small>&nbsp; Unfortunately this plugin was taken down recently due to licensing issues</small></li>
+						</ul>
+					</section>
+					
+					<section>
+						<h4 style="font-size: 0.9em;">Steps to install the "Generate XYZ tiles" plugin</h4>
+						
+						<ul>
+							<li>Extract TilesXYZ.py from <a href="TilesXYZ.zip">TilesXYZ.zip</a> and put it in <pre><code class="dos hljs">\apps\qgis\python\plugins\processing\algs\qgis</code></pre></li>
+							<li>Register TilesXYZ in QgisAlgorithmProvider.py</li>
+							<li>Restart QGIS</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h4>Generating TMS map tiles</h4>
+						
+						<h5>Tools</h5>
+						<ul>
+							<li>GDAL2Tiles</li>
+							<li><a href="qtiles3-1.6.0.zip">QTiles 3</a></li>
+						</ul>
+					</section>
+					
+					<section>
+						<h4>Difference between XYZ & TMZ tiles</h4>
+						
+						<blockquote cite="https://geomappando.com/2018/03/23/visualizzare-raster-suddivisi-in-tiles-tms/" >
+							<img data-src="https://i2.wp.com/geomappando.com/wp-content/uploads/2018/03/XYZ_TMS_formati.png?w=700&ssl=1" />
+						</blockquote> — GeoMappando
+					</section>
+					
+					<section>
+						<h4>Slippy maps & custom tiles data samples</h4>
+						<ul>
+							<li><a href="08-customMapTiles/l_mapXYZTiles.html" target="_blank">Leaflet (XYZ)</a></li>
+							<li><a href="08-customMapTiles/l_mapTMSTiles.html" target="_blank">Leaflet (TMS)</a></li>
+							<li><a href="08-customMapTiles/l_mapBoxTiles.html" target="_blank">Leaflet (mapbox)</a></li>
+							
+							<li><a href="08-customMapTiles/g_mapXYZTiles.html" target="_blank">Google Maps (XYZ)</a></li>
+							<li><a href="08-customMapTiles/g_mapTMSTiles.html" target="_blank">Google Maps (TMS)</a></li>
+							
+						</ul>
+					</section>
+					
+				</section>
+				
 
 			</div>
 		</div>
