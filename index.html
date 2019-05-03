@@ -444,6 +444,67 @@
 					
 				</section>
 				
+				<section>
+					<section>
+						<h4>Basic Git commands</h4>
+						<p>Clone repository</p>
+						
+						<pre><code class="dos hljs">git clone [remote-repo-name]</code></pre>
+						
+						<p>For this repo</p>
+						
+						<pre><code class="dos hljs">git clone https://github.com/dhelie/slippyMaps.git</code></pre>
+						
+						<p>...and don't forget your friend</p>
+						<pre><code class="dos hljs">git status</code></pre>
+						
+					</section>
+					
+					<section>
+						<h4>Basic Git commands (Cont'd)</h4>
+						<p>Push code to remote repository</p>
+						
+						<pre><code data-trim class="dos hljs">
+							git init
+							git add .
+							git commit -m "first commit"
+							git remote add origin https://github.com/dhelie/slippyMaps.git
+							git push -u origin master
+							</code>
+						</pre>
+					</section>
+					
+					<section>
+						<h4>Basic Git commands (Cont'd)</h4>
+						<p>Push changes remote repository</p>
+						
+						<pre><code data-trim class="dos hljs">
+							git commit -am "message"
+							git push -u origin master
+							</code>
+						</pre>
+						
+						<p>For newly added files</p>
+						
+						<pre><code data-trim class="dos hljs">
+							git add [filename1]
+							...
+							git commit -am "message"
+							git push -u origin master
+							</code>
+						</pre>
+					</section>
+					
+					<section>
+						<h4>Basic Git commands (Cont'd)</h4>
+						<p>Pull updates from repository</p>
+						
+						<pre><code data-trim class="dos hljs">
+							git pull origin master
+							</code>
+						</pre>
+					</section>
+				</section>
 
 			</div>
 		</div>
