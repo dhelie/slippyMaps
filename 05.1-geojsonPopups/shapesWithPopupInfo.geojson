@@ -1,0 +1,116 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "popupContent": "This is a LineString or PolyLine"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            35.481719970703125,
+            33.9037611640498
+          ],
+          [
+            35.53407669067383,
+            33.92399018008705
+          ],
+          [
+            35.58300018310547,
+            33.917580096158495
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#0080ff",
+        "marker-size": "medium",
+        "marker-symbol": "circle-stroked",
+        "name": "Beirut",
+        "popupContent": "This is a marker of Beirut"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.5046,
+          33.8861
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "popupContent": "These are AUB Green Field's Polygons"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              35.48113524913788,
+              33.902405416821026
+            ],
+            [
+              35.480858981609344,
+              33.90148821599344
+            ],
+            [
+              35.4815536737442,
+              33.90134796354081
+            ],
+            [
+              35.48182725906372,
+              33.902265165877225
+            ],
+            [
+              35.48113524913788,
+              33.902405416821026
+            ]
+          ],
+          [
+            [
+              35.48125863075256,
+              33.90222064171981
+            ],
+            [
+              35.48164486885071,
+              33.902158307860404
+            ],
+            [
+              35.48145174980163,
+              33.90149044222098
+            ],
+            [
+              35.48104405403137,
+              33.90161511087081
+            ],
+            [
+              35.48125863075256,
+              33.90222064171981
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#ff0000",
+        "marker-size": "medium",
+        "marker-symbol": "circle-stroked",
+        "popupContent": "This marker is for AUB"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.48156976699829,
+          33.90064447156747
+        ]
+      }
+    }
+  ]
+}
