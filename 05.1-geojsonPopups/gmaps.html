@@ -46,7 +46,7 @@
 		  if(popupContent)
 		  {
 			infowindow.setContent(popupContent);
-			infowindow.setPosition(event.feature.getGeometry().get());
+			infowindow.setPosition(event.latLng);
 			infowindow.setOptions({pixelOffset: new google.maps.Size(0, -30)}); // move the infowindow up slightly to the top of the marker icon
 			infowindow.open(map);
 		  }
